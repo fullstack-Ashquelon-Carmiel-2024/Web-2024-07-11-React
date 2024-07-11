@@ -1,9 +1,11 @@
 import './AddUser.scss';
 import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 
 export default function AddUser({children, add}) {
 
   const [formData,setFormData] = useState({});
+  const navigate = useNavigate();
 
   const handleChange = e => setFormData({...formData,
                                    [e.target.name]: e.target.value});
@@ -16,6 +18,7 @@ export default function AddUser({children, add}) {
 
       add(formData);
       setFormData({});
+      navigate('/');
 
     /* } */
 

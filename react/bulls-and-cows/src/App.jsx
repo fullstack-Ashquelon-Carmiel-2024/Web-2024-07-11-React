@@ -3,6 +3,7 @@ import { v4 as uuid } from 'uuid';
 import { Routes, Route } from 'react-router-dom';
 
 import AddUser from './components/addUser/AddUser';
+import BullsAndCows from './games/bulls-and-cows/BullsAndCows';
 import Header from './components/header/Header';
 import Navbar from './components/navbar/Navbar';
 import UserList from './components/userList/UserList';
@@ -59,15 +60,21 @@ function App() {
       <Navbar />
       <div className="appTitle">Bulls and Cows</div>
       <div className="row gx-0 gy-3">
+        {/* Envelopes only the part that participates in the routing */}
+        <Routes>
 
-        <UserList users={users}>
-          <Header title='User List' /> 
-        </UserList>
+          <Route path="/" element={<UserList users={users}>
+                                    <Header title='User List' /> 
+                                  </UserList>} />
+        {/* MISSION: add Route with the link /add-user for AddUser page: */}
 
-        <AddUser add={addUser}>
-          <Header title='Add User' /> 
-        </AddUser>
+          <Route path="/add-user" element={<AddUser add={addUser}>
+                                            <Header title='Add User' /> 
+                                          </AddUser>} />
+                                          
+          <Route path="/bulls-and-cows" element={<BullsAndCows />} />
 
+        </Routes>
       </div>
     </div>
     </UserContext.Provider>
