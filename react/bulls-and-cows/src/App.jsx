@@ -1,16 +1,19 @@
 import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
+import { Routes, Route } from 'react-router-dom';
 
 import AddUser from './components/addUser/AddUser';
 import Header from './components/header/Header';
+import Navbar from './components/navbar/Navbar';
 import UserList from './components/userList/UserList';
 
 import UserContext from './contexts/userContext';
 
 function App() {
-  
-  const [users,setUsers] = useState(
-      [
+  // data inside localStorage is kept as a string
+  const [users,setUsers] = useState(localStorage.getItem('bulls-and-cows-players') ?
+        JSON.parse(localStorage.getItem('bulls-and-cows-players')) 
+      : [
         { id: 77, fullName: 'Harleen Frances Quinzel', nick: 'Harley Quinn',
           email:'harley@gmail.com', phone: '555-5555', gender: 'f',role:'player'},
         { id: 121, fullName: 'Joakin Phoenix', nick: 'Joker',
@@ -23,7 +26,9 @@ function App() {
 
   const removeUser = (id) => {
 
-    setUsers(users.filter(user => user.id !== id));
+    const newUsers = users.filter(user => user.id !== id)
+    setUsers(newUsers);
+    localStorage.setItem('bulls-and-cows-players',JSON.stringify(newUsers));
 
   }
 
@@ -33,7 +38,10 @@ function App() {
     // Date.now() could still be the same, if addUser() runs in a loop 
     // 
     //setUsers(users.concat({...newUser, id: uuid()}));
-    setUsers([...users,{...newUser, id: uuid()}]);
+    const newUsers = [...users,{...newUser, id: uuid()}];
+    setUsers(newUsers);
+    console.log(`users after setUsers()\n`,users);
+    localStorage.setItem('bulls-and-cows-players',JSON.stringify(newUsers));
 
   }
 
@@ -44,9 +52,11 @@ function App() {
   // 4. UserCard: Get it in UserCard
   // 5. UserCard: Use it onClick on the "delete" button
 
+  console.log(`users before return()\n`,users)
   return (
     <UserContext.Provider value={{removeUser}}>
     <div className="App container pb-5">
+      <Navbar />
       <div className="appTitle">Bulls and Cows</div>
       <div className="row gx-0 gy-3">
 

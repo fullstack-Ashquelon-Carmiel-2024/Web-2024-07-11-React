@@ -22,9 +22,13 @@ Functionality:
                                        should color them randomly)
 - Show Product Stock. Product that is "on sale" should show "sale",
   and product that has 4-5 stars should show stars.
+
 - Enable the User to choose Client Avatar and Shopping Cart Avatar
-  and create Client Object
+  and a name and create Client Object and put it into the stock
+  of the clients
+- Be able to choose a client from the stock
 - Enable the User to fill the Cart with Products
+
 
 Optional Recursive part:
 

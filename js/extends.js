@@ -21,8 +21,15 @@ class Animal {
 const Rex = new Animal('Rex',30);
 
 class Gorilla extends Animal {
-    constructor(name, weight) {
-        super(name, weight);  // Run the constructor of the parent class
+    constructor(name, height) {
+        super(name, undefined);  // Run the constructor of the parent class
+        this.continent = 'Africa';
+        this.home = {continent: this.continent, country: undefined};
+        this.height = height;
+    }
+
+    wakeUp() {
+        console.log(`RRRRRRR-RR-RRR-RR`)
     }
 
     climbTrees() {

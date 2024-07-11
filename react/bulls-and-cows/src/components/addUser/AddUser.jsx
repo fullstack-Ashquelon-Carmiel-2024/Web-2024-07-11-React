@@ -12,9 +12,12 @@ export default function AddUser({children, add}) {
 
     e.preventDefault();
 
-    add(formData);
+    /* if (e.target.checkValidity()) { */
 
-    setFormData({});
+      add(formData);
+      setFormData({});
+
+    /* } */
 
   }
 
@@ -28,7 +31,7 @@ export default function AddUser({children, add}) {
           {/* noValidate - removes original HTML validation, 
               pay attention that here in React it is written noValidate
               and not novalidate as in plain HTML */}
-          <form className="fs-3" onSubmit={onSubmit}   >
+          <form className="fs-3" onSubmit={onSubmit} /* noValidate */  >
           
             <div className="form-group row">
                 <div className="opacity-0 text-danger" >
@@ -52,7 +55,9 @@ export default function AddUser({children, add}) {
               <div className="col-12 col-lg-8 offset-lg-1">
 
                   <input className="form-control fs-3" type="email" name="email" id="email" 
-                           required   onChange={handleChange}     value={formData.email}              />
+                           required   onChange={handleChange}     value={formData.email}
+                           pattern="^\w+([\.\-]?\w+)*@\w+([\.\-]?\w+)*(\.\w{2,4})+$"
+                           />
 
                   <div className="invalid-feedback">You should enter a valid email!</div>
               </div>
